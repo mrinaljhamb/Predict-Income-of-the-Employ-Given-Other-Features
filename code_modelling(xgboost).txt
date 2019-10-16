@@ -1,0 +1,45 @@
+dfm = pd.read_csv(r"C:\Users\nikhi\Downloads\mrinal submission\submission\preprocessed_training_data.csv", sep=',', keep_default_na=False, na_values=['#N/A'])
+
+dfm = dfm.drop('hair_color', axis = 1)
+
+Xm = dfm.drop('income', axis = 1).values
+
+Ym = dfm['income'].values
+
+regressor = GradientBoostingRegressor(n_estimators=100)
+
+regressor.fit(Xm, Ym)
+
+dfmt = dfmt.drop('hair_color', axis = 1)
+
+Xmt = dfmt.drop('income', axis = 1).values
+
+Xmt = dfmt.drop('Instance', axis = 1).values
+
+ 
+
+instanceIds= dfmt['Instance'].values
+
+pd.DataFrame({'Instance': instanceIds, 'Income': Ymt}).to_csv("mrinal1.csv", index=False)
+
+ 
+
+regressor = GradientBoostingRegressor(n_estimators=200)
+
+regressor.fit(Xm, Ym)
+
+Ymt = regressor.predict(Xmt)
+
+pd.DataFrame({'Instance': instanceIds, 'Income': Ymt}).to_csv("mrinal2.csv", index=False)
+
+ 
+
+regressor = GradientBoostingRegressor(n_estimators=500)
+
+a1, a2, b1, b2 = train_test_split(Xm, Ym, test_size=0.3, random_state=0)
+
+regressor.fit(a1, b1)
+
+Ymt = regressor.predict(Xmt)
+
+pd.DataFrame({'Instance': instanceIds, 'Income': Ymt}).to_csv("mrinal3.csv", index=False)
